@@ -3,11 +3,11 @@
  * email: 824783146@qq.com
  * source code: https://github.com/wendux/Ajax-hook
  **/
-!function (ob) {
-    ob.hookAjax = function (funs) {
-        window._ahrealxhr = window._ahrealxhr || XMLHttpRequest
+!function (context) {
+    context.hookAjax = function (funs) {
+        context._ahrealxhr = context._ahrealxhr || XMLHttpRequest
         XMLHttpRequest = function () {
-            this.xhr = new window._ahrealxhr;
+            this.xhr = new context._ahrealxhr;
             for (var attr in this.xhr) {
                 var type = "";
                 try {
@@ -57,11 +57,11 @@
                 return this.xhr[fun].apply(this.xhr, args);
             }
         }
-        return window._ahrealxhr;
+        return context._ahrealxhr;
     }
-    ob.unHookAjax = function () {
-        if (window._ahrealxhr)  XMLHttpRequest = window._ahrealxhr;
-        window._ahrealxhr = undefined;
+    context.unHookAjax = function () {
+        if (context._ahrealxhr)  XMLHttpRequest = context._ahrealxhr;
+        context._ahrealxhr = undefined;
     }
 }(window)
 //}(module.exports)
